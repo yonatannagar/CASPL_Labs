@@ -1,0 +1,16 @@
+# All Targets
+all: mypipeline
+
+# Tool invocations
+# Executable "mypipeline" depends on the files:
+mypipeline: mypipeline.o
+	gcc mypipeline.o -o mypipeline
+	rm -f *.o
+
+# Depends on the source file (c)
+mypipeline.o: task2.c 
+	gcc -g -Wall -c task2.c -o mypipeline.o
+
+# Clean the build directory and executable
+clean:
+	rm -f *.o mypipeline

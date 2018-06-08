@@ -1,0 +1,20 @@
+# All Targets
+all: task3
+
+# Tool invocations
+# Executable "task3" depends on the files:
+task3: task3.o line_parser.o
+	gcc task3.o line_parser.o -o task3
+	rm -f *.o
+
+# Depends on the source file (c)
+task3.o: task3.c 
+	gcc -g -Wall -c task3.c -o task3.o
+
+line_parser.o: line_parser.c line_parser.h
+	gcc -g -Wall -c line_parser.c -o line_parser.o
+
+
+# Clean the build directory and executable
+clean:
+	rm -f *.o task3

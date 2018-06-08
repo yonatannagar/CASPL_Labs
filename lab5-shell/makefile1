@@ -1,0 +1,21 @@
+# All Targets
+all: myshell
+
+# Tool invocations
+# Executable "myshell" depends on the files:
+myshell: myshell.o line_parser.o
+	gcc myshell.o line_parser.o -o myshell
+	rm -f *.o
+
+
+# Depends on the source file (c)
+myshell.o: task1c.c 
+	gcc -g -Wall -c task1c.c -o myshell.o
+
+line_parser.o: line_parser.c line_parser.h
+	gcc -g -Wall -c line_parser.c -o line_parser.o
+
+
+# Clean the build directory and executable
+clean:
+	rm -f *.o myshell

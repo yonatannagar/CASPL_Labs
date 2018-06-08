@@ -1,0 +1,1 @@
+/usr/bin/cc -g   CMakeFiles/myELF.dir/task2.c.o  -o myELF 

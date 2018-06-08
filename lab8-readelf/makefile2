@@ -1,0 +1,18 @@
+# All Targets
+all: myELF
+
+# Tool invocations
+# Executable "myELF" depends on the files:
+myELF: myELF.o 
+	gcc myELF.o -o myELF
+	rm -f *.o 
+
+
+# Depends on the source file (c)
+myELF.o: task2.c 
+	gcc -g -Wall -c task2.c -o myELF.o
+
+
+# Clean the build directory and executable
+clean:
+	rm -f *.o myELF
