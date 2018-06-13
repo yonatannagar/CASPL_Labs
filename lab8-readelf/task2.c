@@ -146,23 +146,33 @@ void symbols(){
         char* sh_tab;
         for (j = 0; j < sym_size; ++j) {
             //get section name routine here
-            long section_index = symtable[j].st_shndx;
-            if(section_index < shnum)
-                sh_name = sh_strtab_abs + shdr[section_index].sh_name;
-            else
-                sh_name = "ABS";
-
             len = simple_len(sh_name);
             //get symbol name routine here
             sh_tab = (char*) (map_start + shdr[shdr[i].sh_link].sh_offset);
             sym_name = sh_tab + symtable[j].st_name;
-            printf("%d\t%016lx\t%ld\t\t%s%*s%s\n",
-                   j, //index
-                   symtable[j].st_value, //value (VA)
-                   section_index, //section header index (to get section name)
-                   sh_name, // section header name
-                   (padding - len), " ",
-                   sym_name); //symbol name (double tab space padding)
+            long section_index = symtable[j].st_shndx;
+
+            if(section_index < shnum) {
+                sh_name = sh_strtab_abs + shdr[section_index].sh_name;
+                printf("%d\t%016lx\t%ld\t\t%s%*s%s\n",
+                       j, //index
+                       symtable[j].st_value, //value (VA)
+                       section_index, //section header index (to get section name)
+                       sh_name, // section header name
+                       (padding - len), " ",
+                       sym_name); //symbol name (double tab space padding)
+            }else{
+                printf("%d\t%016lx\t%s\t\t\t%s%*s%s\n",
+                       j, //index
+                       symtable[j].st_value, //value (VA)
+                       "ABS", //section header index (to get section name)
+                       "", // section header name
+                       (padding - len), " ",
+                       sym_name); //symbol name (double tab space padding)
+            }
+
+
+
             ++print_index;
 
         }
